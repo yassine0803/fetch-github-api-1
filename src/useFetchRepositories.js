@@ -36,7 +36,8 @@ const useFetchRepositories = () => {
 
         return () => cancel()
     }, [])
-    return null;
+    
+    return {loading, error, repositories};
 
 }
 
