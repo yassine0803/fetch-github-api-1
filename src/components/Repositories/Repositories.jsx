@@ -9,7 +9,7 @@ const Repositories = ({repositories, loading, error, setCurrentPage, hasMore}) =
         if(observer.current) observer.current.disconnect();
         observer.current = new IntersectionObserver(entries =>{
         if(entries[0].isIntersecting && hasMore){
-            setCurrentPage(prevCusetCurrenPage => prevCusetCurrenPage + 1);
+            setCurrentPage(prevCurrenPage => prevCurrenPage + 1);
         }
         }, [loading, hasMore])
         if(node) observer.current.observe(node)

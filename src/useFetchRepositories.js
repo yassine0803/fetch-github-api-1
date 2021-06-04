@@ -16,6 +16,18 @@ const useFetchRepositories = (currentPage) => {
         order: 'desc',
     }
 
+    //remove duplicates repos
+    const removeDuplicate = (data)=>{
+        var obj = {};
+        let newData = data;
+        for ( var i=0; i < newData.length; i++ ) obj[newData[i]['id']] = newData[i];
+        newData = [];       
+        for ( var key in obj ) newData.push(obj[key]);
+        newData = newData.sort(({stargazers_count:a}, {stargazers_count:b}) => b-a);
+        return newData;      
+    }
+
+    //fetch repositories
     useEffect(() => {
         setLoading(true);
         setError(false);
@@ -26,7 +38,7 @@ const useFetchRepositories = (currentPage) => {
             params: params,
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res =>{
-            let newData = [...repositories, ...res.data.items];
+            let newData = removeDuplicate([...repositories, ...res.data.items]);
             console.log(newData);
             setRepositories(newData);
             setHasMore(res.data.items.length > 0);
