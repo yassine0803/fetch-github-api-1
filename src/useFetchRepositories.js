@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 const useFetchRepositories = (currentPage) => {
     const [loading, setLoading] = useState(true);
@@ -7,13 +8,14 @@ const useFetchRepositories = (currentPage) => {
     const [repositories, setRepositories] = useState([]);
     const [hasMore, setHasMore] = useState(false);
 
-    const url = process.env.REACT_APP_API_URL+'/search/repositories';
+    
 
-    const params ={
-        q: 'created:>=2021-05-05', 
-        page: currentPage,
-        sort: 'stars',
-        order: 'desc',
+    const getDateBefore30Days = ()=>{
+        let date = new Date();
+        date.setDate(date.getDate() - 30);
+        date = moment(date).format("YYYY-MM-DD");
+        console.log(date);
+        return date;
     }
 
     //remove duplicates repos
@@ -27,6 +29,15 @@ const useFetchRepositories = (currentPage) => {
         return newData;      
     }
 
+    const url = process.env.REACT_APP_API_URL+'/search/repositories';
+
+    const params ={
+        q: 'created:>='+getDateBefore30Days(), 
+        page: currentPage,
+        sort: 'stars',
+        order: 'desc',
+    }
+
     //fetch repositories
     useEffect(() => {
         setLoading(true);
@@ -38,8 +49,7 @@ const useFetchRepositories = (currentPage) => {
             params: params,
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res =>{
-            let newData = removeDuplicate([...repositories, ...res.data.items]);
-            console.log(newData);
+            const newData = removeDuplicate([...repositories, ...res.data.items]);
             setRepositories(newData);
             setHasMore(res.data.items.length > 0);
             setLoading(false);
