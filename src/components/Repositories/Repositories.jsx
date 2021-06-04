@@ -1,5 +1,5 @@
 import { Container, CircularProgress, Grid } from "@material-ui/core";
-
+import Repository from '../Repository/Repository';
 
 const Repositories = ({repositories, loading, error}) => {
     return (
@@ -7,7 +7,7 @@ const Repositories = ({repositories, loading, error}) => {
             {repositories.length > 0 && repositories.map((repository)=>(
                 
                         <div key={repository.id}>
-                            <div>{repository.name}</div>
+                            <Repository repository={repository} />
                         </div>
             ))}
             {error && <div>{error}</div>}
