@@ -4,11 +4,11 @@ import Repositories from "./components/Repositories/Repositories";
 import useFetchRepositories from "./useFetchRepositories";
 const App = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const {repositories, loading, error, hasMore}=useFetchRepositories(currentPage);
+  const {repositories, loading, error}=useFetchRepositories(currentPage);
   return ( 
     <div>
       <NavBar />
-      <Repositories repositories={repositories} loading={loading} error={error} setCurrentPage={setCurrentPage} hasMore={hasMore}/>
+      <Repositories repositories={repositories} loading={loading} error={error} setCurrentPage={setCurrentPage} />
     </div>
    );
 }
