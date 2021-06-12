@@ -14,7 +14,7 @@ export default makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    minWidth: 151,
+    width: 151,
   },
   controls: {
     border: 'primary',
@@ -30,7 +30,15 @@ export default makeStyles((theme) => ({
   chip: {
     marginRight: 4,
   },
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('xs')]: {
+    root: {
+      display: 'flex',
+      marginTop: 20,
+      flexDirection: 'column',
+    },
+    cover: {
+      width: '100%',
+    },
     controls: {
       border: 'primary',
       display: 'flex',

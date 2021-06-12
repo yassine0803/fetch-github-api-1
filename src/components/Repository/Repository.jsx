@@ -1,4 +1,4 @@
-import {Card, CardMedia, CardContent, Typography, Chip, Link} from "@material-ui/core";
+import {Card, CardContent, Typography, Chip, Link} from "@material-ui/core";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutline';
 import moment from 'moment';
@@ -9,9 +9,9 @@ const Repository = ({repository}) => {
     const classes = useStyle();
     return ( 
         <Card className={classes.root} >
-            <CardMedia
+            <img
                 className={classes.cover}
-                image={repository.owner.avatar_url}
+                src={repository.owner.avatar_url}
                 title="repository owner avatar"
             />
             <div className={classes.details}>
