@@ -6,6 +6,7 @@ const useFetchRepositories = (currentPage) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [repositories, setRepositories] = useState([]);
+    let cancel;
 
     const url = process.env.REACT_APP_API_URL+'/search/repositories';
     
@@ -26,7 +27,7 @@ const useFetchRepositories = (currentPage) => {
     }
 
     
-
+    //set query params
     const params ={
         q: 'created:>='+getDateBefore30Days(), 
         page: currentPage,
@@ -35,10 +36,9 @@ const useFetchRepositories = (currentPage) => {
     }
 
     //fetch repositories
-    useEffect(() => {
+    const fetchData = () =>{
         setLoading(true);
         setError(false);
-        let cancel;
         axios({
             method: 'GET',
             url: url,
@@ -50,6 +50,10 @@ const useFetchRepositories = (currentPage) => {
             if(axios.isCancel(e)) return;
             setError(true);
         })
+    }
+    
+    useEffect(() => {
+        fetchData();
         return () => cancel()
     }, [currentPage])
     
