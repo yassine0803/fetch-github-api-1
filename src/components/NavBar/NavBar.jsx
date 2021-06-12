@@ -5,9 +5,9 @@ const NavBar = () => {
     const classes = useStyle();
     return ( 
         <>
-            <AppBar className={classes.appBar} position="static" color="inherit">
+            <AppBar className={classes.appBar} position="fixed" color="inherit">
                 <Toolbar className={classes.customizeToolbar}>
-                    <Typography className={classes.heading} variant="h2" align="center">
+                    <Typography className={classes.heading} variant="h4" align="center">
                         GEMOGRAPHY FRONTEND TEST
                     </Typography>
                 </Toolbar>

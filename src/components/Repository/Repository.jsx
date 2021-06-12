@@ -12,7 +12,7 @@ const Repository = ({repository}) => {
             <img
                 className={classes.cover}
                 src={repository.owner.avatar_url}
-                title="repository owner avatar"
+                alt="repository owner avatar"
             />
             <div className={classes.details}>
                 <CardContent className={classes.content}>
